@@ -1,3 +1,5 @@
+####Create VPC component and associate launch EC2 instance with docker running
+
 #initialize
 terraform init
 
