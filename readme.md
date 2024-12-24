@@ -1,96 +1,31 @@
-Terraform: Create VPC and Launch EC2 Instance with Docker
-This repository contains Terraform code to create a VPC component, associate a subnet, and launch an EC2 instance with Docker running on Amazon Web Services (AWS).
+### initialize
 
-Table of Contents
-Prerequisites
-Getting Started
-Commands Overview
-Environment Variables
-Terraform State Management
-Author
-Prerequisites
-Terraform Installed: Install Terraform on your local machine. Installation Guide
-AWS CLI Installed: Install and configure the AWS CLI. Installation Guide
-AWS Credentials: Ensure your AWS access key and secret access key are set up for authentication.
-Getting Started
-Clone the repository:
+    terraform init
 
-bash
-Copy code
-git clone <repository-url>
-cd <repository-folder>
-Initialize the Terraform working directory:
+### preview terraform actions
 
-bash
-Copy code
-terraform init
-Preview the Terraform execution plan:
+    terraform plan
 
-bash
-Copy code
-terraform plan -var-file=terraform-dev.tfvars
-Apply the Terraform configuration:
+### apply configuration with variables
 
-bash
-Copy code
-terraform apply -var-file=terraform-dev.tfvars
-Access your EC2 instance with the public IP displayed in the Terraform output. Ensure Nginx is running on port 8080.
+    terraform apply -var-file terraform-dev.tfvars
 
-Commands Overview
-Initialize Terraform
-Initialize the Terraform working directory:
+### destroy a single resource
 
-bash
-Copy code
-terraform init
-Preview Changes
-Preview the planned actions Terraform will take:
+    terraform destroy -target aws_vpc.myapp-vpc
 
-bash
-Copy code
-terraform plan -var-file=terraform-dev.tfvars
-Apply Configuration
-Apply the configuration and create resources:
+### destroy everything fromtf files
 
-bash
-Copy code
-terraform apply -var-file=terraform-dev.tfvars
-Destroy Resources
-Destroy a specific resource:
-bash
-Copy code
-terraform destroy -target aws_vpc.myapp-vpc
-Destroy all resources defined in the configuration:
-bash
-Copy code
-terraform destroy
-Environment Variables
-Set environment variables for custom Terraform or AWS configuration.
+    terraform destroy
 
-Set Availability Zone
-Before running terraform apply, specify the availability zone:
+### show resources and components from current state
 
-bash
-Copy code
-export TF_VAR_avail_zone="eu-west-3a"
-AWS Credentials
-Set AWS credentials and default region:
+    terraform state list
 
-bash
-Copy code
-export AWS_ACCESS_KEY_ID="anaccesskey"
-export AWS_SECRET_ACCESS_KEY="asecretkey"
-export AWS_DEFAULT_REGION="us-west-2"
-Terraform State Management
-List Resources in State
-Show all resources managed by the current Terraform state:
+### show current state of a specific resource/data
 
-bash
-Copy code
-terraform state list
-View Specific Resource State
-Inspect the current state of a specific resource:
+    terraform state show aws_vpc.myapp-vpc    
 
-bash
-Copy code
-terraform state show aws_vpc.myapp-vpc
+### set avail_zone as custom tf environment variable - before apply
+
+    export TF_VAR_avail_zone="eu-west-3a"
